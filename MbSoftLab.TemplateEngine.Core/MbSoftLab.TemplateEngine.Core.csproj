@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <AssemblyVersion>1.0.8.2</AssemblyVersion>
-    <FileVersion>1.0.8.2</FileVersion>
-    <Version>1.0.8</Version>
-	<PackageVersion>1.0.8-preview2</PackageVersion>  
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <Version>1.1.0</Version>
+	  <PackageVersion>1.1.0-preview</PackageVersion>  
     <Description>This TemplateEngine can replace values from Classpropertys and methods in simple stringtemplates with a very good performance.  The Engine supports the RazorLanguage for creating complex html templates.</Description>
     <DocumentationFile>Documentation.xml</DocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -15,7 +15,7 @@
     <Company>MbSoftLab</Company>
     <Authors>MbSoftLab</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Copyright>© 2021 MbSoftLab</Copyright>
+    <Copyright>© 2021 - 2025 MbSoftLab</Copyright>
     <PackageIcon>MbSoftLabLogo.png</PackageIcon>
     <PackageIconUrl />
     <PackageProjectUrl>https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core</PackageProjectUrl>
