@@ -213,6 +213,62 @@ Console.Write(outputString); // Output: <MyTag>ProjectName</MyTag>
 https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core
 ---
 
+## 📚 Documentation
+
+**Umfassende Dokumentation verfügbar in `/docs`:**
+
+- **[Architektur](/docs/architecture/)** - Technische Übersicht und Design-Entscheidungen
+- **[API-Dokumentation](/docs/api/)** - Vollständige API-Referenz
+- **[Beispiele & Tutorials](/docs/examples/)** - Praktische Codebeispiele
+- **[Entwickler-Leitfaden](/docs/development/)** - Contribution Guidelines und Build-Prozess
+- **[CHANGELOG](/CHANGELOG.md)** - Versions-Historie
+- **[RELEASENOTES](/RELEASENOTES.md)** - Aktuelle Release-Informationen
+
+**Schnellstart:** Siehe [docs/README.md](/docs/README.md)
+
+---
+
+## 🆕 Neu in Version 1.0.8-preview2
+
+### RazorTemplateEngine für komplexe HTML-Templates
+
+```csharp
+public class Person : TemplateDataModel<Person>
+{
+    public string FirstName { get; set; }
+    public List<string> Tags { get; set; }
+}
+
+var person = new Person { FirstName = "Max", Tags = new List<string> { "Tag1", "Tag2" } };
+var engine = new RazorTemplateEngine<Person>();
+
+string razorTemplate = @"
+<h1>@Model.FirstName</h1>
+<ul>
+@foreach(var tag in Model.Tags) {
+    <li>@tag</li>
+}
+</ul>
+";
+
+engine.TemplateString = razorTemplate;
+string html = engine.CreateStringFromTemplate(person);
+```
+
+**Features:**
+- Volle Razor-Syntax-Unterstützung
+- Listen und Collections
+- Bedingungen und Schleifen
+- Verschachtelte Objekte
+
+Mehr Details in den [Release Notes](/RELEASENOTES.md).
+
+---
+
 ## Issues 
 
 [report an issue](https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core/issues)
+
+---
+
+**Commit-Referenz für diese Dokumentation:** 5c37e68
