@@ -9,15 +9,14 @@ jobs:
   publish-nuget:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 3.1.301
-    - name: Install dependencies
-      run: |
-            nuget sources add -name "NuGet official package source" -Source https://api.nuget.org/v3/index.json
-            dotnet restore
+        dotnet-version: 8.0.x
+        cache: true
+    - name: Restore
+      run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Publish to NuGet
