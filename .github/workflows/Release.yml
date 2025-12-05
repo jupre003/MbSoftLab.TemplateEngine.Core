@@ -19,11 +19,7 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
-    - name: Publish to NuGet
-      uses: brandedoutcast/publish-nuget@v2
-      with:
-        PROJECT_FILE_PATH: MbSoftLab.TemplateEngine.Core/MbSoftLab.TemplateEngine.Core.csproj
-        PACKAGE_NAME: Core
-        VERSION_REGEX: '^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$'
-        TAG_FORMAT: 'v*'
-        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+    - name: Pack
+      run: dotnet pack MbSoftLab.TemplateEngine.Core/MbSoftLab.TemplateEngine.Core.csproj --configuration Release --no-restore -o ./artifacts
+    - name: Push to NuGet
+      run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
