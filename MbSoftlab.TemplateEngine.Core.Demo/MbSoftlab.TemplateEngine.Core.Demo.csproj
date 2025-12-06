@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MbSoftLab.TemplateEngine.Core\MbSoftLab.TemplateEngine.Core.csproj" />
+    <ProjectReference Include="..\MbSoftLab.TemplateEngine.Core.Razor\MbSoftLab.TemplateEngine.Core.Razor.csproj" />
   </ItemGroup>
 
   <ItemGroup>

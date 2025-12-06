@@ -14,11 +14,11 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
-        cache: true
+        cache: false
     - name: Restore
-      run: dotnet restore
+      run: dotnet restore MbSoftLab.TemplateEngine.Core.sln
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build MbSoftLab.TemplateEngine.Core.sln --configuration Release --no-restore
     - name: Pack
       run: dotnet pack MbSoftLab.TemplateEngine.Core/MbSoftLab.TemplateEngine.Core.csproj --configuration Release --no-restore -o ./artifacts
     - name: Push to NuGet

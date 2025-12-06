@@ -1,12 +1,11 @@
-﻿using RazorEngineCore;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace MbSoftLab.TemplateEngine.Core;
 
-public class TemplateDataModel<T> : RazorEngineTemplateBase
+public class TemplateDataModel<T>
 {
     [JsonIgnore]
-    public new T Model { get; set; }
+    public T Model { get; set; }
     
     public string GetNullstringValue()
     {
