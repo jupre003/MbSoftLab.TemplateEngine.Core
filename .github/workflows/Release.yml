@@ -19,7 +19,10 @@ jobs:
       run: dotnet restore MbSoftLab.TemplateEngine.Core.sln
     - name: Build
       run: dotnet build MbSoftLab.TemplateEngine.Core.sln --configuration Release --no-restore
-    - name: Pack
-      run: dotnet pack MbSoftLab.TemplateEngine.Core/MbSoftLab.TemplateEngine.Core.csproj --configuration Release --no-restore -o ./artifacts
+    - name: Pack Core and Razor projects
+      run: |
+        mkdir artifacts
+        dotnet pack MbSoftLab.TemplateEngine.Core/MbSoftLab.TemplateEngine.Core.csproj --configuration Release --no-restore -o ./artifacts
+        dotnet pack MbSoftLab.TemplateEngine.Core.Razor/MbSoftLab.TemplateEngine.Core.Razor.csproj --configuration Release --no-restore -o ./artifacts
     - name: Push to NuGet
       run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate

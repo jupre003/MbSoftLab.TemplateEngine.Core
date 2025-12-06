@@ -1,0 +1,25 @@
+name: Publish Docs to Wiki
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'docs/**'
+  workflow_dispatch:
+
+jobs:
+  publish-wiki:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Publish /docs to GitHub Wiki
+        uses: SwiftDocOrg/github-wiki-publish-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          path: docs
+          # Optional: keep history tidy
+          commit_message: 'docs: publish to wiki from /docs'
+          # Optional: remove files not present in docs
+          allow_empty_commit: false
