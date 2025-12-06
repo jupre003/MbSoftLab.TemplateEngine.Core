@@ -1,15 +1,15 @@
 ﻿using RazorEngineCore;
 using System.Text.Json.Serialization;
 
-namespace MbSoftLab.TemplateEngine.Core
+namespace MbSoftLab.TemplateEngine.Core;
+
+public class TemplateDataModel<T> : RazorEngineTemplateBase
 {
-    public class TemplateDataModel<T> : RazorEngineTemplateBase
+    [JsonIgnore]
+    public new T Model { get; set; }
+    
+    public string GetNullstringValue()
     {
-        [JsonIgnore]
-        public new T Model { get; set; }
-        public string GetNullstringValue()
-        {
-            return this.GetNullstringValue();
-        }
+        return this.GetNullstringValue();
     }
 }
