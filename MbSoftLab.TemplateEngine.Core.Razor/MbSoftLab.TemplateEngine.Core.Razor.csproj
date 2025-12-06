@@ -16,6 +16,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>© 2021 - 2025 MbSoftLab</Copyright>
     <PackageIcon>MbSoftLabLogo.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
@@ -31,6 +32,10 @@
     <None Include="../MbSoftLab.TemplateEngine.Core/MbSoftLabLogo.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
+    </None>
+    <None Include="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 
