@@ -225,19 +225,7 @@ Wir freuen uns über Beiträge! Bitte lesen Sie den [Entwickler-Leitfaden](/docs
 
 - **NuGet Package:** https://www.nuget.org/packages/MbSoftLab.TemplateEngine.Core/
 - **GitHub Repository:** https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core
-- **License:** MIT
-
----
-
-## 🗺️ Dokumentations-Roadmap
-
-### Geplante Erweiterungen
-- [ ] Video-Tutorials
-- [ ] Interaktive Code-Beispiele
-- [ ] Performance-Benchmarks
-- [ ] Migration-Guides von anderen Template-Engines
-- [ ] FAQ-Sektion
-- [ ] Troubleshooting-Guide
+- **License:** MIT (siehe [LICENSE](/LICENSE))
 
 ---
 
