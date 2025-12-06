@@ -217,10 +217,10 @@ https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core
 
 **Umfassende Dokumentation verfügbar in `/docs`:**
 
-- **[Architektur](/docs/architecture/)** - Technische Übersicht und Design-Entscheidungen
-- **[API-Dokumentation](/docs/api/)** - Vollständige API-Referenz
-- **[Beispiele & Tutorials](/docs/examples/)** - Praktische Codebeispiele
-- **[Entwickler-Leitfaden](/docs/development/)** - Contribution Guidelines und Build-Prozess
+- **[Architektur](/docs/architecture.md)** - Technische Übersicht und Design-Entscheidungen
+- **[API-Dokumentation](/docs/api.md)** - Vollständige API-Referenz
+- **[Beispiele & Tutorials](/docs/examples.md)** - Praktische Codebeispiele
+- **[Entwickler-Leitfaden](/docs/development.md)** - Contribution Guidelines und Build-Prozess
 - **[CHANGELOG](/CHANGELOG.md)** - Versions-Historie
 - **[RELEASENOTES](/RELEASENOTES.md)** - Aktuelle Release-Informationen
 

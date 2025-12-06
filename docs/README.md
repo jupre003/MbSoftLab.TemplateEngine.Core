@@ -18,7 +18,7 @@ Diese Bibliothek bietet zwei verschiedene Ansätze zur Template-Verarbeitung:
 
 ## 📚 Dokumentations-Struktur
 
-### [Architektur](/docs/architecture/)
+### [Architektur](architecture.md)
 Detaillierte technische Übersicht der Bibliothek:
 - Gesamt-Architektur und Komponenten-Diagramme
 - Klassen-Hierarchie und Beziehungen
@@ -28,7 +28,7 @@ Detaillierte technische Übersicht der Bibliothek:
 
 **Für wen:** Entwickler, die die interne Struktur verstehen wollen
 
-### [API-Dokumentation](/docs/api/)
+### [API-Dokumentation](api.md)
 Vollständige API-Referenz:
 - Alle öffentlichen Klassen und Interfaces
 - Methoden-Signaturen und Parameter
@@ -39,7 +39,7 @@ Vollständige API-Referenz:
 
 **Für wen:** Entwickler, die die API verwenden
 
-### [Beispiele und Tutorials](/docs/examples/)
+### [Beispiele und Tutorials](examples.md)
 Praktische Codebeispiele:
 - Schnellstart-Anleitung
 - Einfache bis fortgeschrittene Beispiele
@@ -49,7 +49,7 @@ Praktische Codebeispiele:
 
 **Für wen:** Einsteiger und Entwickler, die konkrete Anwendungsfälle suchen
 
-### [Entwickler-Leitfaden](/docs/development/)
+### [Entwickler-Leitfaden](development.md)
 Informationen für Contributors:
 - Entwicklungsumgebung einrichten
 - Projekt-Struktur und Organisation
@@ -93,7 +93,7 @@ string result = engine.CreateStringFromTemplate();
 // Output: "Hallo Max Mustermann!"
 ```
 
-Mehr Beispiele finden Sie in der [Beispiele-Dokumentation](/docs/examples/).
+Mehr Beispiele finden Sie in der [Beispiele-Dokumentation](examples.md).
 
 ---
 
