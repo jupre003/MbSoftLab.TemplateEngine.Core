@@ -66,11 +66,10 @@ MbSoftLab.TemplateEngine.Core/
 │       ├── BuildFromDevelop.yml
 │       ├── BuildFromMaster.yml
 │       └── Release.yml
-├── MbSoftLab.TemplateEngine.Core/          # Haupt-Bibliothek
+├── MbSoftLab.TemplateEngine.Core/          # Haupt-Bibliothek (ohne Razor-Abhängigkeit)
 │   ├── ITemplateEngine.cs                   # Interface für Template-Engines
 │   ├── TemplateEngine.cs                    # Simple Template-Engine
-│   ├── RazorTemplateEngine.cs               # Razor-basierte Engine
-│   ├── TemplateDataModel.cs                 # Basis-Klasse für Razor-Models
+│   ├── TemplateDataModel.cs                 # Datenmodell (ohne Razor-Basisklasse)
 │   ├── TemplateDataModelProcessor.cs        # Property/Methoden-Verarbeitung
 │   ├── PlaceholderValueRaplacer.cs          # Platzhalter-Ersetzung
 │   ├── ReplacementActionCollection.cs       # Typ-spezifische Actions
@@ -78,12 +77,12 @@ MbSoftLab.TemplateEngine.Core/
 │   ├── TemplateEngineConfig.cs              # Konfigurations-Implementierung
 │   ├── TemplateEngineExtensions.cs          # Erweiterungsmethoden
 │   └── MbSoftLab.TemplateEngine.Core.csproj # Projekt-Datei
-├── MbSoftLab.TemplateEngine.Core.Tests/    # Unit-Tests
+├── MbSoftLab.TemplateEngine.Core.Tests/    # Unit-Tests (referenzieren bei Bedarf Razor-Projekt)
 │   ├── TemplateEngineUnitTest.cs
 │   ├── RazorTemplateEngineUnitTest.cs
 │   ├── TemplateDataModelDummy.cs            # Test-Fixtures
 │   └── *.cs                                 # Weitere Test-Dateien
-├── MbSoftlab.TemplateEngine.Core.Demo/     # Demo-Anwendung
+├── MbSoftlab.TemplateEngine.Core.Demo/     # Demo-Anwendung (Razor-Demo referenziert Razor-Projekt)
 │   ├── Program.cs
 │   ├── Person.cs
 │   ├── Address.cs
@@ -97,7 +96,10 @@ MbSoftLab.TemplateEngine.Core/
 ├── CHANGELOG.md                             # Versions-Historie
 ├── RELEASENOTES.md                          # Release-Informationen
 ├── README.md                                # Haupt-Dokumentation
-└── MbSoftLab.TemplateEngine.Core.sln       # Solution-Datei
+├── MbSoftLab.TemplateEngine.Core.Razor/    # Optionales Razor-Erweiterungsprojekt
+│   ├── RazorTemplateEngine.cs               # Razor-basierte Engine
+│   └── MbSoftLab.TemplateEngine.Core.Razor.csproj
+└── MbSoftLab.TemplateEngine.Core.sln       # Solution-Datei (enthält beide Projekte)
 ```
 
 ---
@@ -118,6 +120,20 @@ dotnet pack --configuration Release
 ```
 
 **Output:** Das NuGet-Package wird in `bin/Release/` erstellt.
+
+### Razor-Erweiterung (optional)
+
+Das Razor-Feature ist als separates Paket/Projekt verfügbar.
+
+```bash
+# Razor-Erweiterung lokal referenzieren
+dotnet add <IhrProjekt>.csproj reference MbSoftLab.TemplateEngine.Core.Razor/MbSoftLab.TemplateEngine.Core.Razor.csproj
+
+# Oder als NuGet installieren
+dotnet add package MbSoftLab.TemplateEngine.Core.Razor
+```
+
+Die Projekte, die `RazorTemplateEngine<T>` verwenden, müssen die Razor-Erweiterung referenzieren oder das NuGet einsetzen.
 
 ### Tests ausführen
 

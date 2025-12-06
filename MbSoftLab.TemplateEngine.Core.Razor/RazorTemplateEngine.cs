@@ -1,4 +1,4 @@
-﻿using RazorEngineCore;
+using RazorEngineCore;
 using System;
 using System.ComponentModel;
 using System.Globalization;

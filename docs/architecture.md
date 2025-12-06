@@ -20,7 +20,7 @@
 MbSoftLab.TemplateEngine.Core ist eine .NET 8.0 Bibliothek, die zwei verschiedene Template-Engine-Implementierungen bereitstellt:
 
 1. **TemplateEngine<T>** - Einfacher, schneller String-basierter Template-Engine
-2. **RazorTemplateEngine<T>** - Komplexer Razor-basierter Template-Engine für HTML
+2. **RazorTemplateEngine<T>** - Komplexer Razor-basierter Template-Engine für HTML (bereitgestellt durch das optionale Paket `MbSoftLab.TemplateEngine.Core.Razor`)
 
 Beide implementieren das gemeinsame `ITemplateEngine<T>` Interface.
 
@@ -39,7 +39,7 @@ graph TB
     subgraph "MbSoftLab.TemplateEngine.Core"
         B[ITemplateEngine&lt;T&gt;]
         C[TemplateEngine&lt;T&gt;]
-        D[RazorTemplateEngine&lt;T&gt;]
+        D[[RazorTemplateEngine&lt;T&gt;]]
         E[TemplateDataModelProcessor]
         F[PlaceholderValueReplacer]
         G[ReplacementActionCollection]
@@ -48,7 +48,8 @@ graph TB
         J[TemplateEngineExtensions]
     end
     
-    subgraph "External Dependencies"
+    subgraph "MbSoftLab.TemplateEngine.Core.Razor (optional)"
+        D
         K[RazorEngineCore]
     end
     
@@ -125,7 +126,7 @@ classDiagram
     ITemplateEngine~T~ <|.. TemplateEngine~T~
     ITemplateEngine~T~ <|.. RazorTemplateEngine~T~
     ITemplateEngineConfig~T~ <|.. TemplateEngineConfig~T~
-    RazorEngineTemplateBase <|-- TemplateDataModel~T~
+    %% Core ist von Razor entkoppelt; kein RazorEngineTemplateBase
     TemplateEngine~T~ --> ITemplateEngineConfig~T~
     RazorTemplateEngine~T~ --> ITemplateEngineConfig~T~
     RazorTemplateEngine~T~ --> TemplateDataModel~T~

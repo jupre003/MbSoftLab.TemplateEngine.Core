@@ -30,7 +30,13 @@ string result = engine.CreateStringFromTemplate();
 // Output: "Hallo Max Mustermann!"
 ```
 
-### Razor-Template-Beispiel
+### Razor-Template-Beispiel (optional)
+
+Installieren Sie zusätzlich das optionale Paket:
+
+```bash
+dotnet add package MbSoftLab.TemplateEngine.Core.Razor
+```
 
 ```csharp
 public class Person : TemplateDataModel<Person>
@@ -44,6 +50,7 @@ var person = new Person {
     Tags = new List<string> { "Developer", "Designer" } 
 };
 
+// Razor steht erst nach Installation von MbSoftLab.TemplateEngine.Core.Razor zur Verfügung
 var engine = new RazorTemplateEngine<Person>();
 engine.TemplateString = @"
 <h1>@Model.FirstName</h1>

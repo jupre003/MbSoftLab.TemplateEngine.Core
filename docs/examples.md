@@ -28,6 +28,12 @@ Install-Package MbSoftLab.TemplateEngine.Core
 dotnet add package MbSoftLab.TemplateEngine.Core
 ```
 
+Optional: Razor-Unterstützung
+
+```bash
+dotnet add package MbSoftLab.TemplateEngine.Core.Razor
+```
+
 ### Erstes Beispiel (30 Sekunden)
 
 ```csharp
@@ -342,12 +348,13 @@ string result = engine.CreateStringFromTemplate();
 
 ---
 
-## Razor-Templates
+## Razor-Templates (optional)
 
 ### Beispiel 12: Einfaches Razor-Template
 
 ```csharp
 using MbSoftLab.TemplateEngine.Core;
+// Hinweis: Stellen Sie sicher, dass das Paket MbSoftLab.TemplateEngine.Core.Razor installiert ist.
 
 public class Person : TemplateDataModel<Person>
 {
@@ -363,6 +370,7 @@ var person = new Person
     Age = 35
 };
 
+// Razor steht erst nach Installation von MbSoftLab.TemplateEngine.Core.Razor zur Verfügung
 var engine = new RazorTemplateEngine<Person>();
 
 string razorTemplate = @"

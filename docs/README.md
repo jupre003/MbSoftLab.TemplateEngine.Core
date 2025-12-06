@@ -11,8 +11,8 @@
 Willkommen zur offiziellen Dokumentation der **MbSoftLab.TemplateEngine.Core** Bibliothek - einer leistungsstarken und flexiblen Template-Engine für .NET 8.0.
 
 Diese Bibliothek bietet zwei verschiedene Ansätze zur Template-Verarbeitung:
-- **TemplateEngine<T>** - Schnell und einfach für String-basierte Templates
-- **RazorTemplateEngine<T>** - Mächtig und flexibel für komplexe HTML-Templates mit Razor-Syntax
+- **TemplateEngine<T>** – Schnell und einfach für String-basierte Templates
+- **RazorTemplateEngine<T>** – Mächtig und flexibel für komplexe HTML-Templates mit Razor-Syntax (optional, verfügbar nach Installation von `MbSoftLab.TemplateEngine.Core.Razor`)
 
 ---
 
@@ -74,6 +74,12 @@ Install-Package MbSoftLab.TemplateEngine.Core
 dotnet add package MbSoftLab.TemplateEngine.Core
 ```
 
+Optional: Razor-Unterstützung installieren
+
+```bash
+dotnet add package MbSoftLab.TemplateEngine.Core.Razor
+```
+
 ### Erstes Beispiel
 
 ```csharp
@@ -121,10 +127,11 @@ var engine = new TemplateEngine<Customer>(customer, "Hallo ${Name}!");
 
 → Siehe [Einfache Beispiele](/docs/examples/#einfache-beispiele)
 
-### 2. Komplexe HTML-Templates
+### 2. Komplexe HTML-Templates (optional)
 Für dynamische HTML-Generierung mit Schleifen, Bedingungen und verschachtelten Objekten.
 
 ```csharp
+// Razor steht erst nach Installation von MbSoftLab.TemplateEngine.Core.Razor zur Verfügung
 var engine = new RazorTemplateEngine<Person>();
 engine.TemplateString = "@foreach(var item in Model.Items) { <li>@item</li> }";
 ```
