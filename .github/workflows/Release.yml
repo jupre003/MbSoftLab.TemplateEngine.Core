@@ -1,29 +1,41 @@
 name: Release
 
 on:
- release:
-    types: 
+  release:
+    types:
       - published
 
 jobs:
-  publish-nuget:
-    runs-on: windows-latest
+  publish-core:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-        cache: false
-    - name: Restore
-      run: dotnet restore MbSoftLab.TemplateEngine.Core.sln
-    - name: Build
-      run: dotnet build MbSoftLab.TemplateEngine.Core.sln --configuration Release --no-restore
-    - name: Pack Core and Razor projects
-      run: |
-        dotnet pack MbSoftLab.TemplateEngine.Core/MbSoftLab.TemplateEngine.Core.csproj --configuration Release --no-restore
-        dotnet pack MbSoftLab.TemplateEngine.Core.Razor/MbSoftLab.TemplateEngine.Core.Razor.csproj --configuration Release --no-restore
-    - name: Push Core package to NuGet
-      run: dotnet nuget push MbSoftLab.TemplateEngine.Core/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
-    - name: Push Razor package to NuGet
-      run: dotnet nuget push MbSoftLab.TemplateEngine.Core.Razor/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore
+        run: dotnet restore MbSoftLab.TemplateEngine.Core/MbSoftLab.TemplateEngine.Core.csproj
+      - name: Build
+        run: dotnet build MbSoftLab.TemplateEngine.Core/MbSoftLab.TemplateEngine.Core.csproj --configuration Release --no-restore
+      - name: Pack
+        run: dotnet pack MbSoftLab.TemplateEngine.Core/MbSoftLab.TemplateEngine.Core.csproj --configuration Release --no-restore
+      - name: Publish to NuGet
+        run: dotnet nuget push MbSoftLab.TemplateEngine.Core/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+
+  publish-razor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore
+        run: dotnet restore MbSoftLab.TemplateEngine.Core.Razor/MbSoftLab.TemplateEngine.Core.Razor.csproj
+      - name: Build
+        run: dotnet build MbSoftLab.TemplateEngine.Core.Razor/MbSoftLab.TemplateEngine.Core.Razor.csproj --configuration Release --no-restore
+      - name: Pack
+        run: dotnet pack MbSoftLab.TemplateEngine.Core.Razor/MbSoftLab.TemplateEngine.Core.Razor.csproj --configuration Release --no-restore
+      - name: Publish to NuGet
+        run: dotnet nuget push MbSoftLab.TemplateEngine.Core.Razor/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
