@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
-    <FileVersion>1.1.0.0</FileVersion>
-    <Version>1.1.0</Version>
-	  <PackageVersion>1.1.0-preview</PackageVersion>  
+    <AssemblyVersion>1.1.1.0</AssemblyVersion>
+    <FileVersion>1.1.1.0</FileVersion>
+    <Version>1.1.1</Version>
+	  <PackageVersion>1.1.1</PackageVersion>  
     <Description>This TemplateEngine can replace values from Classpropertys and methods in simple stringtemplates with a very good performance.  The Engine supports the RazorLanguage for creating complex html templates.</Description>
     <DocumentationFile>Documentation.xml</DocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
