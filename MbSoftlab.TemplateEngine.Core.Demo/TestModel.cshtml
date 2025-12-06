@@ -1,0 +1,46 @@
+﻿@inherits MbSoftLab.TemplateEngine.Core.Demo.Person
+@* @using MbSoftLab.TemplateEngine.Core.Demo  ToDo: Add Support for using Namespce*@
+
+<h1>Hello @Model.FirstName</h1> 
+
+<h1>Your tags are</h1>
+@foreach (string tag in Model.Tags)
+{
+    <p>@tag</p>
+}
+
+<h1>You made this this Orders</h1>
+
+@foreach (var order in Model.Orders)
+{
+
+    <p1>OderId: @order.Id</p1>
+    <p1>
+        Products:
+        @foreach (var product in order.Products)
+        {
+            <span>Name: @product.ProductName</span>
+            <span>Preis: @product.Price</span>
+        }
+
+    </p1>
+}
+
+
+<area>
+@{ RecursionTest(3); }
+</area>
+
+@{
+    void RecursionTest(int level)
+    {
+        if (level <= 0)
+        {
+            return;
+        }
+
+        <div>LEVEL: @level</div>
+        RecursionTest(level - 1);
+    }
+}
+

@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using MbSoftLab.TemplateEngine.Core;
+using System.Collections.Generic;
 
 namespace TemplateEngineCore.Tests
 {
-    public class TemplateDataModelDummyWithList
+    public class TemplateDataModelDummyWithList:TemplateDataModel<TemplateDataModelDummyWithList>
     {
         public string DummyStringProp1 { get; set; }
         public List<string> DummyStringListProp2 { get; set; }

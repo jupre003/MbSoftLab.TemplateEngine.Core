@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Globalization;
 
-namespace MbSoftLab.TemplateEngine.Core
+namespace MbSoftLab.TemplateEngine.Core;
+
+interface IPlaceholderValueRaplacer
 {
-    interface IPlaceholderValueRaplacer
-    {
-        void ReplacePlaceholderWithValue(Type valueType, string placeholderValueName, object value);
-        string OutputString { get; }
-        CultureInfo CultureInfo { get; set; }
-    }
+    void ReplacePlaceholderWithValue(Type valueType, string placeholderValueName, object value);
+    string OutputString { get; }
+    CultureInfo CultureInfo { get; set; }
 }

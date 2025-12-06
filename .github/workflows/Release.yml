@@ -9,20 +9,17 @@ jobs:
   publish-nuget:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 7.x
-    - name: Install dependencies
-      run: dotnet restore
+        dotnet-version: 8.0.x
+        cache: false
+    - name: Restore
+      run: dotnet restore MbSoftLab.TemplateEngine.Core.sln
     - name: Build
-      run: dotnet build --configuration Release --no-restore
-    - name: Publish to NuGet
-      uses: brandedoutcast/publish-nuget@v2
-      with:
-        PROJECT_FILE_PATH: MbSoftLab.TemplateEngine.Core/MbSoftLab.TemplateEngine.Core.csproj
-        PACKAGE_NAME: Core
-        VERSION_REGEX: '^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$'
-        TAG_FORMAT: 'v*'
-        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+      run: dotnet build MbSoftLab.TemplateEngine.Core.sln --configuration Release --no-restore
+    - name: Pack
+      run: dotnet pack MbSoftLab.TemplateEngine.Core/MbSoftLab.TemplateEngine.Core.csproj --configuration Release --no-restore -o ./artifacts
+    - name: Push to NuGet
+      run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate

@@ -1,0 +1,15 @@
+{
+  "DummyStringProp1": "DummyStringProp1Value",
+  "DummyIntProp1": 1,
+  "DummBoolProp1": true,
+  "DummyBoolQProp1": true,
+  "DummyDoubleProp1": 1.75,
+  "DummyDateTimeProp1": "2020-01-01T00:00:00",
+  "DummyInt64Prop": 1234567,
+  "DummyUInt16": 8,
+  "DummyInt16": -8,
+  "DummyDecimalProp": 55,
+  "DummyCharProp": "c",
+  "DummyByteProp": 255,
+  "DummySByteProp": -5
+}

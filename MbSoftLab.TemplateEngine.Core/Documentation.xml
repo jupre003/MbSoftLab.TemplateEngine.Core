@@ -46,12 +46,6 @@
             Get or Set the string for NULL-Values. Default = NULL. 
             </summary>
         </member>
-        <member name="M:MbSoftLab.TemplateEngine.Core.TemplateEngine`1.LoadTemplateFromFile(System.String)">
-            <summary>
-            Loads a Templatestring from File
-            </summary>
-            <param name="path">Path to File with Templatestring.</param>
-        </member>
         <member name="M:MbSoftLab.TemplateEngine.Core.TemplateEngine`1.CreateStringFromTemplate(System.String)">
             <summary>
             Replaces all Propertys of templateDataModel in stringTemplate. The Popertynames from templateDataModel a the name of ${Placeholder} have to be equal. 
@@ -89,6 +83,17 @@
             <summary>
             <inheritdoc cref="T:MbSoftLab.TemplateEngine.Core.ITemplateEngineConfig`1"/>
             </summary>
+        </member>
+        <member name="M:MbSoftLab.TemplateEngine.Core.TemplateEngineExtensions.CreateStringFromTemplateWithJson``1(MbSoftLab.TemplateEngine.Core.ITemplateEngine{``0},System.String)">
+            <summary>
+            Load the TemplateDataModel from JSON and builds a String with this Data
+            </summary>
+        </member>
+        <member name="M:MbSoftLab.TemplateEngine.Core.TemplateEngineExtensions.LoadTemplateFromFile``1(MbSoftLab.TemplateEngine.Core.ITemplateEngine{``0},System.String)">
+            <summary>
+            Loads a Templatestring from File
+            </summary>
+            <param name="path">Path to File with Templatestring.</param>
         </member>
     </members>
 </doc>

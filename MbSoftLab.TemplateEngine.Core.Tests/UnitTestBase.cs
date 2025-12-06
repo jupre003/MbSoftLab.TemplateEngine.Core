@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using MbSoftLab.TemplateEngine.Core;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 
@@ -50,8 +51,12 @@ namespace TemplateEngineCore.Tests
                 DummySByteProp = -5
 
             };
-
-            return templateDataModelFake;
+       
+                return templateDataModelFake;
+        }
+        public string GetDummyJson()
+        {
+            return System.IO.File.ReadAllText("DummyJsonData.json");
         }
         public TemplateDataModelDummyWithList GetTemplateDataModelDummyWithListAndMethod()
         {

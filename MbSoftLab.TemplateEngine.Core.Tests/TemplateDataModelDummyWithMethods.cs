@@ -1,6 +1,8 @@
-﻿namespace TemplateEngineCore.Tests
+﻿using MbSoftLab.TemplateEngine.Core;
+
+namespace TemplateEngineCore.Tests
 {
-    public class TemplateDataModelDummyWithMethods
+    public class TemplateDataModelDummyWithMethods:TemplateDataModel<TemplateDataModelDummyWithMethods>
     {
 
         public string StringReturningMethod()

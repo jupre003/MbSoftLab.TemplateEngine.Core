@@ -1,216 +1,229 @@
-﻿# MbSoftLab.TemplateEngine.Core
+# MbSoftLab.TemplateEngine.Core
 
-![BuildFromDevelop](https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core/workflows/BuildFromDevelop/badge.svg?branch=develop) ![BuildFromMaster](https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core/workflows/BuildFromMaster/badge.svg?branch=master)![Release](https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core/workflows/Release/badge.svg) 
-
-*Codequality (master branch)*
+[![Build (develop)](https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core/workflows/BuildFromDevelop/badge.svg?branch=develop)](https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core/actions)
+[![Build (master)](https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core/workflows/BuildFromMaster/badge.svg?branch=master)](https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core/actions)
+[![Release](https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core/workflows/Release/badge.svg)](https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core/actions)
 [![CodeFactor](https://www.codefactor.io/repository/github/mbsoftlab/mbsoftlab.templateengine.core/badge)](https://www.codefactor.io/repository/github/mbsoftlab/mbsoftlab.templateengine.core)
+[![NuGet](https://img.shields.io/nuget/v/MbSoftLab.TemplateEngine.Core.svg)](https://www.nuget.org/packages/MbSoftLab.TemplateEngine.Core/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-*Codequality (develop branch)*
-[![CodeFactor](https://www.codefactor.io/repository/github/mbsoftlab/mbsoftlab.templateengine.core/badge/develop)](https://www.codefactor.io/repository/github/mbsoftlab/mbsoftlab.templateengine.core/overview/develop)
+> Eine leistungsstarke und flexible Template-Engine für .NET 8.0 mit Unterstützung für einfache String-Templates und komplexe Razor-Templates.
+
+---
+
+## 🚀 Schnellstart
+
+### Installation
+
+```bash
+dotnet add package MbSoftLab.TemplateEngine.Core
+```
+
+### Einfaches Beispiel
+
 ```csharp
-namespace MbSoftLab.TemplateEngine.Core
+using MbSoftLab.TemplateEngine.Core;
+
+var person = new { FirstName = "Max", LastName = "Mustermann" };
+var engine = new TemplateEngine(person, "Hallo ${FirstName} ${LastName}!");
+string result = engine.CreateStringFromTemplate();
+// Output: "Hallo Max Mustermann!"
+```
+
+### Razor-Template-Beispiel (optional)
+
+Installieren Sie zusätzlich das optionale Paket:
+
+```bash
+dotnet add package MbSoftLab.TemplateEngine.Core.Razor
+```
+
+```csharp
+public class Person : TemplateDataModel<Person>
 {
-    public class TemplateEngine : TemplateEngine<object>{}
-
-    public class TemplateEngine<T>{...}
+    public string FirstName { get; set; }
+    public List<string> Tags { get; set; }
 }
+
+var person = new Person { 
+    FirstName = "Anna", 
+    Tags = new List<string> { "Developer", "Designer" } 
+};
+
+// Razor steht erst nach Installation von MbSoftLab.TemplateEngine.Core.Razor zur Verfügung
+var engine = new RazorTemplateEngine<Person>();
+engine.TemplateString = @"
+<h1>@Model.FirstName</h1>
+<ul>
+@foreach(var tag in Model.Tags) {
+    <li>@tag</li>
+}
+</ul>";
+
+string html = engine.CreateStringFromTemplate(person);
 ```
- 
- 
-The TemplateEngine replaces values from properties of C# classes in template strings.
-The C# class with the data holding properties is called the TemplateDataModel class. 
-The string with the placeholders is called a string template or template string.
 
+---
 
-You can bind the value from your C-property to your string template by using `${YourPropertyName}`. 
-You can set a custom delimiters. Use the `OpeningDelimiter` and `CloseingDelimiter` properties to handle this.
+## ✨ Features
 
-Also you can access parameterless public methods of TemplateDataModell classes by using `${MethodName()}` in your template. 
+### Zwei leistungsstarke Engines
 
+- **TemplateEngine<T>** - Schnell und einfach für String-basierte Templates
+  - Property-Platzhalter: `${PropertyName}`
+  - Methoden-Aufrufe: `${MethodName()}`
+  - Anpassbare Delimiters
+  - Kultur-spezifische Formatierung
+  
+- **RazorTemplateEngine<T>** - Flexibel für komplexe HTML-Templates
+  - Volle Razor-Syntax
+  - Listen und Collections
+  - Bedingungen und Schleifen
+  - Verschachtelte Objekte
 
-The default is `${` for the start delimiter and `}` for the end delimiter.
+### Unterstützte Datentypen
 
+✅ String, Byte, Short, Int, Long, Decimal, Double, DateTime, Boolean  
+❌ Collections (nur mit RazorTemplateEngine)
+
+---
+
+## 📚 Dokumentation
+
+**Vollständige Dokumentation verfügbar unter [`/docs`](/docs):**
+
+| Dokument | Beschreibung |
+|----------|--------------|
+| [📖 Übersicht](/docs/README.md) | Dokumentations-Einstieg |
+| [🏗️ Architektur](/docs/architecture.md) | System-Design und Komponenten |
+| [📋 API-Referenz](/docs/api.md) | Vollständige API-Dokumentation |
+| [💡 Beispiele](/docs/examples.md) | 16+ praktische Code-Beispiele |
+| [👨‍💻 Entwickler-Leitfaden](/docs/development.md) | Contribution Guidelines |
+| [📝 CHANGELOG](/CHANGELOG.md) | Versions-Historie |
+| [🎉 Release Notes](/RELEASENOTES.md) | Aktuelle Version 1.0.8-preview2 |
+
+---
+
+## 💡 Verwendungsbeispiele
+
+### Template aus Datei laden
 
 ```csharp
- Person person = new Person
- {
-     FirstName = "Jo",
-     LastName="Doe"
- };
-
-string template = "<MyTag>${FirstName}, ${LastName}</MyTag>";
-
-TemplateEngine templateEngine = new TemplateEngine(person,template);
-string outputString = templateEngine.CreateStringFromTemplate();
-
-Console.Write(outputString); // Output: <MyTag>Jo, Doe</MyTag> 
+var engine = new TemplateEngine<Customer>(customer);
+engine.LoadTemplateFromFile("email-template.txt");
+string email = engine.CreateStringFromTemplate();
 ```
 
----
+### JSON-Daten verwenden
 
-## Install Package
-
-**NuGet Package:** 
-https://www.nuget.org/packages/MbSoftLab.TemplateEngine.Core/
-
-```PM
-PM> Install-Package MbSoftLab.TemplateEngine.Core
-```
-
----
-
-## Methods 
-|Methodname                                                            |Description                                                     |
-|------------------------------------------------------------------------|-----------------------------------------------------------------|
-|`string CreateStringFromTemplate([string template])`                |*Creates a String from Datamodell and Template*   |
-|`void LoadTemplateFromFile(string filename)`                          |*Loads a Stringtemplate from file*.                  |
-|`TemplateEngine()`                                                   |Constructor         |
-|`TemplateEngine(object templateDataModel, string stringTemplate)`     |Constructor         |
-|`TemplateEngine(object templateDataModel)`                            |Constructor         |
-|`TemplateEngine<T>()`                                               |Constructor         |
-|`TemplateEngine<T>(T templateDataModel, string stringTemplate)`     |Constructor         |
-|`TemplateEngine<T>(T templateDataModel)`                            |Constructor         |
-
----
-
-## Propertys 
-
-|Propertyname                            |Datatype          |Description                                                           |
-|----------------------------------------|------------------|-------------------------------------------------------------------------|
-|`OpeningDelimiter`                    |String            |Set the beginning delimiter for propertyreplacement                     |
-|`CloseingDelimiter`                   |String            |Set the ending delimiter for propertyreplacement                       |
-|`TemplateDataModel`                      |Generic / object  |Modell with Properys for Dataholding                                     |
-|`TemplateString`                      |string            |Templatestring                                                     |
-|`NullStringValue`                     |string            |String for NULL-Values                                              |
-|`CultureInfo`                     |CultureInfo           |Culture for Double and DateTime values                                   |
-
----
-
-## Exampels
-
-### **Load the template and fill with Data from modell**
 ```csharp
-// Create a modell Class for Data
- TemplateDataModel templateDataModel = new TemplateDataModel
- {
-     ProjectName = "Projektname"
- };
-
-string template = "<MyTag>${ProjectName}</MyTag>";
-
-TemplateEngine templateEngine = new TemplateEngine(templateDataModel,template);
-string outputString = templateEngine.CreateStringFromTemplate();
-
-Console.Write(outputString); // Output: <MyTag>ProjectName</MyTag> 
+string jsonData = "{\"Name\":\"Lisa\",\"Email\":\"lisa@example.com\"}";
+var engine = new TemplateEngine<Customer>();
+engine.TemplateString = "Kunde: ${Name}, E-Mail: ${Email}";
+string result = engine.CreateStringFromTemplateWithJson(jsonData);
 ```
-### **Load template from file**
+
+### Custom Delimiters
+
 ```csharp
-    TemplateDataModel templateDataModel = new TemplateDataModel
-    {
-      ProjectName = "Projektname",
-      CustomerId = "1234",
-      ProjectUrl = "https://google.com"
-    };
-
-     TemplateEngine templateEngine = new TemplateEngine(templateDataModel);
-     templateEngine.LoadTemplateFromFile("Html.template.html");
-     string outputString = templateEngine.CreateStringFromTemplate();
-
-     Console.WriteLine(outputString);
+var engine = new TemplateEngine<Person>(person, "[[FirstName]] [[LastName]]");
+engine.OpeningDelimiter = "[[";
+engine.CloseingDelimiter = "]]";
 ```
 
+### NULL-Werte behandeln
 
-### **Template and model over PropertyInjection** 
 ```csharp
- TemplateDataModel templateDataModel = new TemplateDataModel
- {
-     ProjectName = "Projectname",
-     CustomerId = "1234",
-     ProjectUrl = "https://google.com"
- };
-
- string template = "<p>${ProjectName}</p>";
- TemplateEngine templateEngine = new TemplateEngine();
- templateEngine.TemplateDataModel = templateDataModel;
- templateEngine.TemplateString = template;
- Console.WriteLine(templateEngine.CreateStringFromTemplate());
-
+var engine = new TemplateEngine<Customer>(customer, "${Email}");
+engine.NullStringValue = "Keine Angabe";
 ```
 
-### **Template and model over DependencyInjection** 
-```csharp
-
-  TemplateDataModel templateDataModel = new TemplateDataModel
-  {
-      ProjectName = "Projectname",
-      CustomerId = "1234",
-      ProjectUrl = "https://google.com"
-  };
-
-  string template = "<p>${ProjectName}</p>";
-  TemplateEngine templateEngine = new TemplateEngine(templateDataModel,template);
-  Console.WriteLine(templateEngine.CreateStringFromTemplate());
-
-
-```
-### **TemplateEngine with PropertyInjection and generic type**
-```csharp
- TemplateDataModel templateDataModel = new TemplateDataModel
- {
-     ProjectName = "Projectname",
-     CustomerId = null,
-     ProjectUrl = "https://google.de"
- };
-
- string template = "<p>{{ProjectName}}</p><p>{{CustomerId}}</p>";
- TemplateEngine<TemplateDataModel> templateEngine = new TemplateEngine<TemplateDataModel>()
- {
-     TemplateDataModel = templateDataModel,
-     TemplateString = template,
-     OpeningDelimiter = "{{",
-     CloseingDelimiter = "}}",
-     NullStringValue = "???"
- };
- Console.WriteLine(templateEngine.CreateStringFromTemplate());
-
-```
-
+Weitere Beispiele und Tutorials finden Sie in der [Beispiele-Dokumentation](/docs/examples.md).
 
 ---
 
- ## Datatype compatibility
- 
-- ✔ String
-- ✔ Byte
-- ✔ Short
-- ✔ UShort
-- ✔ Long
-- ✔ ULong
-- ✔ SByte
-- ✔ Char
-- ✔ UInt16
-- ✔ Int32
-- ✔ UInt64
-- ✔ Int16
-- ✔ Int32
-- ✔ Int64
-- ✔ Decimal
-- ✔ Double
-- ✔ DateTime
-- ✔ Boolean
-- ❌ Object
-- ❌ CustomClasses
-- ❌ IList, List, Dictionary, IEnumerable, etc..
+## 🔧 Hauptfunktionen
 
- 
+### TemplateEngine
+
+| Feature | Beschreibung |
+|---------|--------------|
+| Property-Binding | `${PropertyName}` für einfache Werte |
+| Methoden-Aufrufe | `${MethodName()}` für parameterlose Methoden |
+| Custom Delimiters | Anpassbare Start-/End-Zeichen |
+| NULL-Behandlung | Konfigurierbarer NULL-String |
+| Formatierung | Kultur-spezifisch (CultureInfo) |
+| JSON-Support | Direkte Deserialisierung |
+| File-Loading | Templates aus Dateien laden |
+
+### RazorTemplateEngine
+
+| Feature | Beschreibung |
+|---------|--------------|
+| Razor-Syntax | Volle C#-Unterstützung in Templates |
+| Collections | Listen, Arrays, IEnumerable |
+| Kontrollstrukturen | `@if`, `@foreach`, `@for`, `@switch` |
+| Verschachtelung | Komplexe Objekthierarchien |
+| Type-Safety | Generische Typisierung |
 
 ---
- 
-## Repo 
 
-https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core
+## 📦 NuGet Package
+
+```bash
+# .NET CLI
+dotnet add package MbSoftLab.TemplateEngine.Core
+
+# Package Manager
+Install-Package MbSoftLab.TemplateEngine.Core
+
+# PackageReference
+<PackageReference Include="MbSoftLab.TemplateEngine.Core" Version="1.0.8-preview2" />
+```
+
+**NuGet Gallery:** https://www.nuget.org/packages/MbSoftLab.TemplateEngine.Core/
+
 ---
 
-## Issues 
+## 🤝 Contributing
 
-[report an issue](https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core/issues)
+Wir freuen uns über Beiträge! Bitte lesen Sie unseren [Entwickler-Leitfaden](/docs/development.md) für:
+
+- Entwicklungsumgebung einrichten
+- Code-Konventionen
+- Branch-Strategie
+- Pull Request Prozess
+
+---
+
+## 📄 Lizenz
+
+Dieses Projekt ist unter der [MIT-Lizenz](LICENSE) lizenziert.
+
+Copyright © 2021 MbSoftLab
+
+---
+
+## 🔗 Links
+
+- **GitHub Repository:** https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core
+- **Issues/Feedback:** https://github.com/mbsoftlab/MbSoftLab.TemplateEngine.Core/issues
+- **NuGet Package:** https://www.nuget.org/packages/MbSoftLab.TemplateEngine.Core/
+
+---
+
+## 🆕 Version 1.0.8-preview2
+
+**Highlights:**
+- ✨ RazorTemplateEngine für komplexe HTML-Templates
+- ✨ Erweiterte Methoden-Aufrufe in Templates
+- 🔧 Verbesserter Build- und Release-Prozess
+- 📚 Umfassende deutsche Dokumentation
+
+Siehe [Release Notes](/RELEASENOTES.md) für Details.
+
+---
+
+<p align="center">
+  <sub>Built with ❤️ by MbSoftLab</sub>
+</p>

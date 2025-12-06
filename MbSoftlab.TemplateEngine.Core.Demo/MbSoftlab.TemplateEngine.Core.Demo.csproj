@@ -1,16 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
-
-    <IsPackable>false</IsPackable>
+    <ImplicitUsings>enable</ImplicitUsings>
+	  <RazorCompileToolset>RazorSdk</RazorCompileToolset>
+	  <RazorCompileOnBuild>true</RazorCompileOnBuild>
+	  <EmbedRazorGenerateSources>true</EmbedRazorGenerateSources>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="nunit" Version="3.14.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MbSoftLab.TemplateEngine.Core\MbSoftLab.TemplateEngine.Core.csproj" />
@@ -18,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="DummyJsonData.json">
+    <None Update="TestModel.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
